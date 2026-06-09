@@ -1,0 +1,21 @@
+# --- Personal data: keep it local, never publish ---------------------------
+
+# Per-machine active config (copy of config.example.yaml). Holds active_profile
+# and any local tweaks. The committed template is config.example.yaml.
+agents/*/config/config.yaml
+
+# Real user profiles. Only the example template is tracked.
+agents/*/config/profiles/*.yaml
+!agents/*/config/profiles/example.yaml
+
+# Generated application artifacts & trackers (resumes, cover letters, results,
+# applied.json, reports). Keep the output/ folder itself via its .gitkeep.
+agents/*/output/*/
+!agents/*/output/.gitkeep
+
+# --- OS / editor noise -----------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

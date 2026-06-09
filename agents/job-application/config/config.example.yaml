@@ -1,0 +1,57 @@
+# =============================================================================
+# Example global configuration. Copy this to config/config.yaml (or just run
+# /setup, which creates it for you) and edit. config/config.yaml is gitignored
+# so your active profile and any local tweaks stay off the public repo.
+#
+# A profile in config/profiles/<id>.yaml may override any section here via its
+# `overrides:` block. Resolution precedence: profile.overrides > this file.
+# =============================================================================
+
+# Which profile is currently active. Set by /setup and /use.
+# Outputs are written to output/<active_profile>/...
+active_profile: example
+
+# Where the agent looks for listings (browser-assisted via Claude in Chrome).
+sources:
+  - linkedin
+  - wellfound
+  - remoteok
+  - yc_jobs
+  - company_career_pages
+
+# Additive scoring rubric. Each signal that a job matches adds its points.
+# Final score is capped at max_score. Profiles can reweight via overrides.scoring.
+scoring:
+  weights:
+    react: 20
+    nextjs: 20
+    react_native: 20
+    aws: 20
+    remote: 20
+  max_score: 100
+
+# Jobs matching ANY of these categories are dropped before scoring.
+reject_rules:
+  - internship
+  - fresher
+  - unpaid
+  - commission_only
+  - min_experience_lt_3_years
+  - php_only
+  - wordpress_only
+
+# Application behavior. The confirmation gate is mandatory and must never be
+# disabled by code — require_confirmation: false is NOT honored by the agent.
+application:
+  daily_cap: 20
+  require_confirmation: true
+  confirmation_prompt: "Apply? (yes/no)"
+
+# Allowed values for the `status` field in each user's data/applied.json.
+tracker:
+  statuses:
+    - Prepared
+    - Applied
+    - Interview
+    - Rejected
+    - Offer

@@ -1,0 +1,58 @@
+# Example profile — copy this to config/profiles/<your-id>.yaml and edit, OR
+# just run /setup and the agent will generate one for you interactively.
+#
+# The filename (without .yaml) becomes your profile id, e.g. `alice.yaml` -> alice.
+# Keep it lowercase-kebab-case with no spaces.
+
+name: Alice Example
+location: Berlin, Germany
+role: Senior Backend Engineer
+
+# List ONLY skills/technologies you actually have. This is the single source of
+# truth for resumes & cover letters — the agent will never claim anything else.
+stack:
+  - Python
+  - Go
+  - PostgreSQL
+  - Kubernetes
+  - AWS
+  - Docker
+  - REST APIs
+  - gRPC
+
+salary_targets:
+  india_lpa_min: 0          # set 0 / omit dimensions that don't apply to you
+  remote_usd_min: 90000
+
+preferences:
+  priority:                 # ordered tie-breakers, most important first
+    - remote
+    - aws
+  preferred_locations:
+    - Remote
+    - Germany
+    - Netherlands
+
+# Reweight scoring to YOUR stack here. Anything under overrides wins over the
+# global config/config.yaml defaults. This is what makes the agent genuinely
+# yours rather than a copy of someone else's priorities.
+overrides:
+  scoring:
+    weights:                # define the signals that matter to you
+      python: 20
+      go: 20
+      kubernetes: 20
+      aws: 20
+      remote: 20
+  reject_rules:
+    - frontend_only         # add categories you never want to see
+  sources:                  # optional: restrict where the agent searches
+    - linkedin
+    - remoteok
+    - yc_jobs
+
+contact:
+  email: ""
+  phone: ""
+  linkedin: ""
+  portfolio: ""
