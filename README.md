@@ -4,6 +4,7 @@
 > **any** AI coding assistant — Claude, Gemini, Cursor, Copilot, and more — through the
 > open [`AGENTS.md`](https://agents.md) standard.
 
+[![validate](https://github.com/hrdevop/universal-ai-agents/actions/workflows/validate.yml/badge.svg)](https://github.com/hrdevop/universal-ai-agents/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/standard-AGENTS.md-0a7cff)](https://agents.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)

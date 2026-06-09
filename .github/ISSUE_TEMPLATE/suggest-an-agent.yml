@@ -1,0 +1,48 @@
+name: 💡 Suggest an agent
+description: Propose a new agent to add to the collection
+title: "[Agent idea] "
+labels: ["agent-idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Agents here are config-driven and vendor-neutral
+        (they work with any AGENTS.md-aware assistant). Tell us what you have in mind.
+  - type: input
+    id: name
+    attributes:
+      label: Agent name
+      placeholder: e.g. outreach-agent, research-agent
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What should it do?
+      description: The workflow in a few sentences — inputs, what it produces, who it's for.
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: What should be configurable?
+      description: What lives in the per-user profile vs. global defaults (so it serves anyone)?
+    validations:
+      required: false
+  - type: textarea
+    id: tools
+    attributes:
+      label: External tools / data sources
+      description: Any web/browser/API access it needs. Remember the rules — no captcha bypass, no auto-submit, human-in-the-loop.
+    validations:
+      required: false
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to build it?
+      options:
+        - "Yes, I'd like to open a PR"
+        - "Maybe, with some guidance"
+        - "No, just suggesting"
+    validations:
+      required: false

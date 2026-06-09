@@ -26,6 +26,16 @@ touch another agent to add yours.
    - `agents/*/config/profiles/*.yaml` except `example.yaml` — gitignored
    - `agents/*/output/*/` — gitignored (keep an `output/.gitkeep`)
 4. **Register it** by adding a row to the agents table in [README.md](README.md).
+5. **Validate** before opening a PR:
+
+   ```bash
+   pip install pyyaml
+   python3 scripts/validate-agents.py
+   ```
+
+   This checks every agent has its `AGENTS.md` + adapters, that YAML parses, and that
+   no personal data is tracked. CI ([`.github/workflows/validate.yml`](.github/workflows/validate.yml))
+   runs the same check on every push and PR.
 
 ## Principles to keep
 

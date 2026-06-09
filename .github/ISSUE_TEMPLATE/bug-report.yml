@@ -1,0 +1,47 @@
+name: 🐞 Bug report
+description: Something didn't work as expected
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which agent?
+      options:
+        - job-application
+        - other / repo-wide
+    validations:
+      required: true
+  - type: dropdown
+    id: assistant
+    attributes:
+      label: Which AI assistant were you using?
+      options:
+        - Claude Code
+        - Gemini CLI
+        - Cursor
+        - GitHub Copilot
+        - Windsurf
+        - Other (note it below)
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What went wrong, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Opened agents/job-application in ...
+        2. Ran the Search routine ...
+        3. ...
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: "⚠️ Please redact personal data (real resumes, emails, API keys) before posting."
