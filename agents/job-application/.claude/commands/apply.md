@@ -3,7 +3,10 @@ description: Prepare a tailored resume + cover letter, confirm, then track
 argument-hint: <company name or row # from results.md>
 ---
 
-# /apply — Prepare & (with approval) apply
+# Apply routine — Prepare & (with approval) apply
+
+> Claude Code exposes this as `/apply`; any assistant can run it by asking to "Apply"
+> to a job from the results.
 
 Prepare application materials for one job from the active profile's
 `output/<active_profile>/jobs/results.md`, then gate on explicit confirmation.
@@ -46,9 +49,11 @@ Prepare application materials for one job from the active profile's
 
 ## On approval
 
-9. Help the user submit via their browser (Claude in Chrome): open the apply link,
-   fill what can be filled from the materials, and hand off for anything requiring
-   their judgment. Never bypass captchas and never auto-solve assessments —
+9. Help the user submit. If your assistant has browser automation (Claude in Chrome,
+   Playwright MCP, a built-in browser tool), open the apply link and fill what can be
+   filled from the materials, handing off anything requiring their judgment. If it
+   doesn't, give the user the apply link plus the resume/cover-letter paths to submit
+   themselves. Either way: never bypass captchas and never auto-solve assessments —
    pause and ask the user for those.
 10. Update the tracker row to `status: "Applied"` with today's date. Confirm done
     and report remaining daily-cap headroom.

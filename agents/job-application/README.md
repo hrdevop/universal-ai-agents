@@ -1,23 +1,29 @@
 # Job Application Agent
 
-A configurable, **multi-user** job-search-and-application assistant driven by
-Claude Code. It sources roles from your browser, scores them against *your*
-priorities, tailors a truthful resume + cover letter per job, and tracks
-everything — and it never submits anything without your explicit OK.
+A configurable, **multi-user** job-search-and-application assistant that runs on **any
+AI coding assistant** (Claude, Gemini, Cursor, Copilot, …). It sources roles, scores
+them against *your* priorities, tailors a truthful resume + cover letter per job, and
+tracks everything — and it never submits anything without your explicit OK.
 
 It's config-driven: nothing about any one person is baked in. Each user has their
 own profile, their own scoring weights, and their own private output folder.
 
+## Works with any assistant
+
+The canonical manual is [`AGENTS.md`](AGENTS.md), read natively by Cursor, Codex,
+Gemini CLI, Windsurf, Aider, Zed, Cline, and more. Claude Code reads it via `CLAUDE.md`
+and adds slash commands; Gemini CLI via `GEMINI.md`. The workflows below are **routines**
+you can trigger by name in any assistant — in Claude Code they're also slash commands.
+
 ## Quick start
 
-```text
-1. /setup          # answer a few questions — generates your profile
-2. /search         # finds & scores jobs in your browser, writes a ranked list
-3. /apply <job>    # tailors materials, asks "Apply? (yes/no)", then tracks it
-4. /report         # daily summary of what happened
-```
-
-Already have multiple people using this? Switch between them with `/use <id>`.
+| Routine | Claude Code | Any assistant |
+|---------|-------------|---------------|
+| Generate your profile | `/setup` | "run the **Setup** routine" |
+| Find & rank jobs | `/search` | "do a **Search**" |
+| Tailor + apply (with your OK) | `/apply <job>` | "**Apply** to <job>" |
+| Daily summary | `/report` | "run the **Report**" |
+| Switch user | `/use <id>` | "**Switch** to profile <id>" |
 
 ## How it works
 
@@ -50,10 +56,12 @@ additions) are dropped before scoring.
 
 ## Sourcing
 
-Jobs are read from **your own browser session** (Claude in Chrome) across LinkedIn,
-Wellfound, RemoteOK, YC Jobs, and company career pages. The agent respects your
-logins and will **pause and ask you** to handle any captcha or login wall — it never
-bypasses them.
+Jobs are read using whatever web access your assistant has — a browser-automation tool
+driving your own session (e.g. Claude in Chrome, Playwright MCP), a web-fetch/search
+tool, or, if it has none, listings **you paste in**. Sources include LinkedIn,
+Wellfound, RemoteOK, YC Jobs, and company career pages. The agent respects your logins
+and will **pause and ask you** to handle any captcha or login wall — it never bypasses
+them.
 
 ## The rules it always follows
 
@@ -63,5 +71,5 @@ bypasses them.
 - Never bypasses captchas or auto-solves hiring assessments.
 - Caps at 20 applications/day; prefers quality over quantity.
 
-See `CLAUDE.md` for the full operating manual and `.claude/commands/` for what each
-slash command does.
+See [`AGENTS.md`](AGENTS.md) for the full operating manual and `.claude/commands/` for
+the detailed step-by-step of each routine.

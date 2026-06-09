@@ -1,0 +1,17 @@
+---
+description: Vendor-neutral agent instructions — defer to AGENTS.md
+alwaysApply: true
+---
+
+This repository's canonical instructions live in `AGENTS.md` files (Cursor also reads
+`AGENTS.md` natively; this rule is belt-and-suspenders).
+
+- Repo-wide conventions: the root `AGENTS.md`.
+- The agent you're working in: `agents/<name>/AGENTS.md`
+  (e.g. `agents/job-application/AGENTS.md`).
+
+Always read and follow the `AGENTS.md` nearest to the files you're editing. Key rules
+that always hold: keep personal data out of git (real `config/config.yaml`,
+`config/profiles/*.yaml`, and `output/` are gitignored — only the `example` templates
+are tracked); stay human-in-the-loop (propose, don't auto-submit; never bypass
+captchas/logins; never fabricate); keep agents self-contained.
