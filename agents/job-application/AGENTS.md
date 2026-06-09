@@ -26,7 +26,10 @@ Two layers, resolved at the start of every run:
    confirmation prompt), `tracker.statuses`. (On a fresh clone this file does not
    exist yet — create it by copying `config/config.example.yaml`.)
 2. **`config/profiles/<id>.yaml`** — one file per user: `name`, `location`, `role`,
-   `stack`, `salary_targets`, `preferences`, optional `overrides`, `contact`.
+   `stack`, `salary_targets`, `preferences`, optional `overrides`, `contact`, and
+   optional `resume_source` (path/URL to their master resume) + `experience` (real work
+   history). The **Setup** routine can import most of these automatically by reading the
+   user's resume — see Routines below.
 
 **Resolution precedence: `profile.overrides` > `config.yaml` defaults.** A profile's
 `overrides.scoring` / `overrides.reject_rules` / `overrides.sources` replace the
@@ -63,7 +66,7 @@ exposes them as slash commands (`.claude/commands/`), shown in parentheses.
 
 | Routine | (Claude slash) | What it does |
 |---------|----------------|--------------|
-| **Setup** | `/setup` | Interview a new user, write `config/profiles/<id>.yaml`, activate it, scaffold their output dirs |
+| **Setup** | `/setup` | Import the user's resume (or interview) to auto-fill `config/profiles/<id>.yaml`, activate it, scaffold their output dirs |
 | **Switch profile** | `/use <id>` | Change the active profile (ensures their output dirs exist) |
 | **Search** | `/search` | Source listings → filter → score → ranked `results.md` |
 | **Apply** | `/apply <job>` | Tailor resume + cover letter, show summary, **confirmation gate**, update tracker |

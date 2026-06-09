@@ -140,16 +140,25 @@ routine by name.
 
 ### Setup — create your profile
 
+The fast path: **give it your resume** and it fills in the details for you.
+
 ```text
 You: /setup
-Agent: (interviews you) name? location? role? your real skills? salary targets?
-       preferred locations? what matters most? anything to always reject?
-   →  writes config/profiles/alice.yaml
-   →  sets active_profile: alice in config.yaml
-   →  scaffolds output/alice/ with an empty tracker
+Agent: Got a resume? Paste it or give me the path (PDF/DOCX/MD/TXT).
+You: ~/Documents/resume.pdf
+Agent: reads it → extracts name, location, role, contact, skills (stack), and your
+       real work history (experience). Then asks only what a resume can't tell it:
+       salary targets? preferred locations? what matters most? anything to reject?
+   →  shows you the draft to confirm/correct (especially skills & experience)
+   →  writes config/profiles/alice.yaml  (+ saves resume_source & experience)
+   →  sets active_profile: alice, scaffolds output/alice/ with an empty tracker
 ```
 
-Run it once per person. Re-running for an existing profile asks before overwriting.
+No resume handy? It falls back to a short interview for the same fields. Run Setup once
+per person; re-running for an existing profile asks before overwriting.
+
+> The imported `experience` (and your `resume_source`) let the **Apply** routine tailor
+> from your *real* history — not just a skills list — while never inventing anything.
 
 ### Search — find, score & rank
 

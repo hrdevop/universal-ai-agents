@@ -56,3 +56,17 @@ contact:
   phone: ""
   linkedin: ""
   portfolio: ""
+
+# Optional: path or URL to your master resume. Kept local & gitignored. /setup can
+# import your details from it, and the Apply routine can tailor from it per job.
+resume_source: ""           # e.g. ~/Documents/resume.pdf
+
+# Optional: your real work history — imported from your resume during /setup (or added
+# by hand). Used to tailor per-job resumes TRUTHFULLY. Never invent entries here.
+experience:
+  - company: Globex
+    title: Backend Engineer
+    dates: "2021–2024"
+    highlights:
+      - Built and scaled gRPC services on Kubernetes (AWS EKS)
+      - Cut p99 latency 40% by reworking PostgreSQL query paths

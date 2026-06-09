@@ -27,8 +27,9 @@ Prepare application materials for one job from the active profile's
 ## Prepare materials
 
 4. Analyze the job description. Fill `templates/resume.md.tmpl` using ONLY facts
-   from the profile (tailor emphasis, never fabricate) →
-   `output/<active_profile>/resumes/<company>-resume.md`.
+   from the profile — its `stack` and `experience`, and, if present, the resume at
+   `resume_source` (read it for richer detail). Tailor emphasis to the JD; never
+   fabricate. → `output/<active_profile>/resumes/<company>-resume.md`.
 5. Fill `templates/coverletter.md.tmpl` (≤250 words, personalized, names the
    overlapping technologies, no generic AI filler) →
    `output/<active_profile>/coverletters/<company>.md`.
