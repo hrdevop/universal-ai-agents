@@ -83,21 +83,31 @@ each, but the **effective** weights come from the resolved config — never assu
 defaults; read them. Break ties using the profile's `preferences.priority` order.
 Apply `reject_rules` (effective set) **before** scoring; never surface a rejected job.
 
-## Sourcing (tool-agnostic)
+## Sourcing (tool-agnostic) — combine strategies, strongest first
 
-Read listings using **whatever web/browser capability your assistant has** — pick the
-best available:
+Don't rely on one method (that's how Search comes up empty). Work down this ladder and
+combine — full step-by-step in `.claude/commands/search.md`:
 
-- A browser-automation tool driving the user's real session (e.g. Claude in Chrome,
-  Playwright/Puppeteer MCP, or a built-in browser tool). Open a **new tab** per source;
-  don't hijack the user's existing tabs.
-- A web-fetch/search tool for public listings and company career pages.
-- **No web access?** Ask the user to paste the job listings or URLs; score those.
+1. **Sub-agent fan-out (best).** If your assistant can spawn sub-agents (Claude Code: the
+   **Agent** tool), dispatch one per source concurrently; each returns structured job
+   records, then merge and dedupe.
+2. **Public job APIs (always try — no login, rarely empty).** Fetch directly with any
+   web tool: RemoteOK `https://remoteok.com/api` (skip element 0), Arbeitnow
+   `https://www.arbeitnow.com/api/job-board-api`, Hacker News "Who is hiring" via
+   `https://hn.algolia.com/api/v1/search?tags=story&query=who%20is%20hiring`, and company
+   ATS boards (Greenhouse `boards-api.greenhouse.io/v1/boards/<co>/jobs`, Lever
+   `api.lever.co/v0/postings/<co>?mode=json`, Ashby `api.ashbyhq.com/posting-api/job-board/<co>`).
+3. **Browser automation** for JS-rendered / gated boards — a Playwright MCP, or Claude in
+   Chrome for the user's logged-in session.
+4. **Manual paste** fallback — the user pastes URLs/descriptions; score those.
 
-Whichever path you use:
-- On a **login wall or captcha**, STOP and ask the user to log in / solve it. **Never
-  bypass either.**
-- Extract per job: Company, Position, Location, Salary (if shown), Apply Link.
+Guardrails, every strategy:
+- On a **login wall, captcha, or bot-block**, STOP and ask the user to log in / solve it
+  — or switch that source to a public API. **Never bypass.**
+- **Never silently return nothing** — if a source is empty, say so and try the next one;
+  report what was tried.
+- Extract per job: Company, Position, Location, Salary (if shown), Apply Link, and the
+  matched signals (for scoring).
 
 ## Tracking — `output/<id>/data/applied.json`
 

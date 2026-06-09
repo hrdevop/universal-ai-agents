@@ -267,18 +267,23 @@ ask the agent, or edit the file).
 
 ## Sourcing options
 
-The agent reads listings with whatever web access your assistant has — pick the best
-available:
+Search combines strategies, strongest first, so it actually finds jobs instead of coming
+up empty:
 
-1. **Browser-assisted (recommended).** A browser-automation tool drives your real,
-   logged-in session (e.g. Claude in Chrome, Playwright MCP). Best results on LinkedIn /
-   Wellfound where you're signed in.
-2. **Web fetch/search.** For public listings and company career pages.
-3. **Manual paste.** No web tools? Paste job URLs or descriptions and the agent scores,
-   tailors, and tracks them all the same.
+1. **Sub-agent fan-out (best).** If your assistant can spawn sub-agents (Claude Code's
+   Agent tool), it runs one per source in parallel, each finding and returning structured
+   listings, then merges them.
+2. **Public job APIs (no login needed, rarely empty).** RemoteOK, Arbeitnow, Hacker News
+   "Who is hiring", and company ATS boards (Greenhouse / Lever / Ashby) — fetched
+   directly, so they work even without a browser.
+3. **Browser automation.** A Playwright MCP, or Claude in Chrome driving your own
+   logged-in session — best for JS-heavy or gated boards like LinkedIn / Wellfound.
+4. **Manual paste.** No web tools at all? Paste job URLs or descriptions and the agent
+   scores, tailors, and tracks them the same.
 
-On any **login wall or captcha**, the agent stops and asks you to handle it — it never
-bypasses either.
+On any **login wall, captcha, or bot-block**, the agent stops and asks you to handle it
+(or falls back to a public API) — it never bypasses either. And it never silently returns
+nothing: if a source is empty, it tells you and tries the next.
 
 ## Using it for more than one person
 
